@@ -8,7 +8,6 @@ public class Brick extends Entity {
 
 	public Brick(Image image, Game game) {
 		super(image, game);
-		// TODO Auto-generated constructor stub
 	}
 
 }
