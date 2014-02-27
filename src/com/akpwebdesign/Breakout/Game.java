@@ -20,7 +20,7 @@ import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
 
-public class Game extends BasicGame {
+public class Game extends BasicGame implements IGame {
 	private Input input = new Input(0);
 	private Paddle paddle = null;
 	private GameContainer gc = null;
@@ -118,10 +118,13 @@ public class Game extends BasicGame {
 	}
 
 	public void initPhysics() {
-		PhysicsUtils.addWall(-1, 0, 1, 600, world);
-		PhysicsUtils.addWall(801, 0, 1, 600, world);
-		PhysicsUtils.addWall(0, 601, 800, 1, world);
-		PhysicsUtils.addWall(0, -1, 800, 1, world);
+		PhysicsUtils.addWall(-1, 0, 600, Math.toRadians(0), world);
+		PhysicsUtils.addWall(801, 0, 600, Math.toRadians(0), world);
+		PhysicsUtils.addWall(0, 601, 800, Math.toRadians(90), world);
+		PhysicsUtils.addWall(0, -1, 800, Math.toRadians(90), world);
+		
+		PhysicsUtils.addBall(0, 0, 10, world);
+		PhysicsUtils.addBall(800, 0, 10, world);
 		
 		Slick2DJBox2DDebugDraw sDD = new Slick2DJBox2DDebugDraw(gc);
 		
