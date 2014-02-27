@@ -4,9 +4,9 @@
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BreakoutEngineCore"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/jbox2d-library-2.2.1.1.jar"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lwjgl.jar"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/slick.jar"/>
+	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/jbox2d-library-2.2.1.1.jar"/>
+	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

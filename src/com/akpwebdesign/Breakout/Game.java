@@ -28,6 +28,7 @@ public class Game extends BasicGame {
 	private World world = new World(new Vec2(0.0f, 0.0f));
 	private int bricksBroken = 0;
 	private boolean debug = false;
+	private boolean exitRequested = false;
 
 	public Game(String gamename) throws SlickException {
 		super(gamename);
@@ -70,6 +71,9 @@ public class Game extends BasicGame {
 
 	@Override
 	public void update(GameContainer gc, int i) throws SlickException {
+		if(this.exitRequested)
+			exit();
+		
 		input.poll(gc.getWidth(), gc.getHeight());
 
 		float timeStep = 1.0f / 120.0f;
@@ -89,7 +93,7 @@ public class Game extends BasicGame {
 		}
 
 		if (input.isKeyDown(Input.KEY_ESCAPE)) {
-			gc.exit();
+			this.exitRequested = true;
 		}
 
 		if (input.isKeyDown(Input.KEY_F12)) {
@@ -123,5 +127,10 @@ public class Game extends BasicGame {
 		
 		sDD.setFlags(0x0001|0x0002|0x0004|0x0010|0x0020|0x0040|0x0080);
 		world.setDebugDraw(sDD);
+	}
+
+	private void exit() {
+		gc.exit();
+		Main.exit();
 	}
 }
