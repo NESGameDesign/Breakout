@@ -27,7 +27,7 @@ public class Game extends BasicGame {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private World world = new World(new Vec2(0.0f, 0.0f));
 	private int bricksBroken = 0;
-	private boolean debug = true;
+	private boolean debug = false;
 
 	public Game(String gamename) throws SlickException {
 		super(gamename);
