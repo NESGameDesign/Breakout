@@ -12,10 +12,12 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.util.ResourceLoader;
 
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
+import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
@@ -29,6 +31,7 @@ public class Game extends BasicGame implements IGame {
 	private int bricksBroken = 0;
 	private boolean debug = false;
 	private boolean exitRequested = false;
+	private Map tileMap;
 
 	public Game(String gamename) throws SlickException {
 		super(gamename);
@@ -66,6 +69,8 @@ public class Game extends BasicGame implements IGame {
 		this.gc = gc;
 		entities.add(paddle);
 		entities.add(ball);
+		this.tileMap = new Map(ResourceLoader.getResourceAsStream("res/lvl1.tmx"), "res/");
+		
 		this.initPhysics();
 	}
 
@@ -110,6 +115,9 @@ public class Game extends BasicGame implements IGame {
 		for (int x = 0; x < entities.size(); x++) {
 			entities.get(x).draw();
 		}
+		
+
+		tileMap.render(0, 0);
 		
 		if(this.debug)
 		{
