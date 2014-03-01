@@ -12,12 +12,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.util.ResourceLoader;
-
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
-import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
@@ -31,8 +28,7 @@ public class Game extends BasicGame implements IGame {
 	private int bricksBroken = 0;
 	private boolean debug = false;
 	private boolean exitRequested = false;
-	private Map tileMap;
-
+	
 	public Game(String gamename) throws SlickException {
 		super(gamename);
 	}
@@ -69,7 +65,6 @@ public class Game extends BasicGame implements IGame {
 		this.gc = gc;
 		entities.add(paddle);
 		entities.add(ball);
-		this.tileMap = new Map(ResourceLoader.getResourceAsStream("res/lvl1.tmx"), "res/");
 		
 		this.initPhysics();
 	}
@@ -116,9 +111,6 @@ public class Game extends BasicGame implements IGame {
 			entities.get(x).draw();
 		}
 		
-
-		tileMap.render(0, 0);
-		
 		if(this.debug)
 		{
 			world.drawDebugData();
@@ -130,9 +122,6 @@ public class Game extends BasicGame implements IGame {
 		PhysicsUtils.addWall(801, 0, 600, Math.toRadians(0), world);
 		PhysicsUtils.addWall(0, 601, 800, Math.toRadians(90), world);
 		PhysicsUtils.addWall(0, -1, 800, Math.toRadians(90), world);
-		
-		PhysicsUtils.addBall(0, 0, 10, world);
-		PhysicsUtils.addBall(800, 0, 10, world);
 		
 		Slick2DJBox2DDebugDraw sDD = new Slick2DJBox2DDebugDraw(gc);
 		

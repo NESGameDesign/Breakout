@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/BreakoutEngineCore"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/jbox2d-library-2.2.1.1.jar"/>
 	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/lwjgl.jar"/>
 	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/slick.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jbox2d-library"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
