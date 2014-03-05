@@ -12,9 +12,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
+import com.akpwebdesign.Breakout.entity.brick.Brick;
+import com.akpwebdesign.Breakout.entity.brick.BrickType;
+import com.akpwebdesign.Breakout.physics.GameCollisionListener;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
@@ -22,6 +26,7 @@ import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
 public class Game extends BasicGame implements IGame {
 	private Input input = new Input(0);
 	private Paddle paddle = null;
+	private Ball ball = null;
 	private GameContainer gc = null;
 	private List<Entity> entities = new ArrayList<Entity>();
 	private World world = new World(new Vec2(0.0f, 0.0f));
@@ -31,10 +36,15 @@ public class Game extends BasicGame implements IGame {
 	
 	public Game(String gamename) throws SlickException {
 		super(gamename);
+		
 	}
 
 	public Paddle getPaddle() {
 		return paddle;
+	}
+	
+	public Ball getBall() {
+		return ball;
 	}
 
 	public List<Entity> getEntities() {
@@ -60,11 +70,32 @@ public class Game extends BasicGame implements IGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		paddle = new Paddle(new Image("res/paddle.png"), this);
-		Ball ball = new Ball(new Image("res/ball.png"), this);
+		ball = new Ball(new Image("res/ball.png"), this);
 		ball.setScale(0.75f);
 		this.gc = gc;
 		entities.add(paddle);
 		entities.add(ball);
+		
+		Brick brick = null;
+		
+		//TODO: implement maps. :D
+		
+		for(int x = 0; x < 16; x++) {
+
+			for(int i = 22; i < (800-49); )
+			{
+				brick = new Brick(BrickType.RED, this);
+
+				brick.setScale((float) 0.75);
+				
+				brick.setX(i);
+				brick.setY(brick.getImageHeight()*x+30);
+				
+				entities.add(brick);
+				
+				i = (int) (i + brick.getImageWidth());
+			}
+		}
 		
 		this.initPhysics();
 	}
@@ -82,7 +113,9 @@ public class Game extends BasicGame implements IGame {
 
 		for (int x = 0; x < entities.size(); x++) {
 			entities.get(x).update(input);
-
+		}
+		
+		for (int x = 0; x < entities.size(); x++) {
 			if (entities.get(x).getBody().m_type == BodyType.DYNAMIC) {
 				for (int j = 0; j < 120; ++j) {
 					world.step(timeStep, velocityIterations, positionIterations);
@@ -124,9 +157,11 @@ public class Game extends BasicGame implements IGame {
 		PhysicsUtils.addWall(0, -1, 800, Math.toRadians(90), world);
 		
 		Slick2DJBox2DDebugDraw sDD = new Slick2DJBox2DDebugDraw(gc);
+		GameCollisionListener gcl = new GameCollisionListener();
 		
 		sDD.setFlags(0x0001|0x0002|0x0004|0x0010|0x0020|0x0040|0x0080);
 		world.setDebugDraw(sDD);
+		world.setContactListener(gcl);
 	}
 
 	private void exit() {
