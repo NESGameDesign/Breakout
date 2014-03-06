@@ -81,18 +81,13 @@ public class Game extends BasicGame implements IGame {
 		//TODO: implement maps. :D
 		
 		for(int x = 0; x < 16; x++) {
-
 			for(int i = 22; i < (800-49); )
 			{
-				brick = new Brick(BrickType.RED, this);
-
+				brick = new Brick(BrickType.randomType(), this);				
 				brick.setScale((float) 0.75);
-				
 				brick.setX(i);
 				brick.setY(brick.getImageHeight()*x+30);
-				
 				entities.add(brick);
-				
 				i = (int) (i + brick.getImageWidth());
 			}
 		}
@@ -159,7 +154,7 @@ public class Game extends BasicGame implements IGame {
 		Slick2DJBox2DDebugDraw sDD = new Slick2DJBox2DDebugDraw(gc);
 		GameCollisionListener gcl = new GameCollisionListener();
 		
-		sDD.setFlags(0x0001|0x0002|0x0004|0x0010|0x0020|0x0040|0x0080);
+		sDD.setFlags(0x0001|0x0004);
 		world.setDebugDraw(sDD);
 		world.setContactListener(gcl);
 	}
