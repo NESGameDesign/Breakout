@@ -31,8 +31,12 @@ public class Game extends BasicGame implements IGame {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private World world = new World(new Vec2(0.0f, 0.0f));
 	private int bricksBroken = 0;
+	private int score = 0;
 	private boolean debug = false;
 	private boolean exitRequested = false;
+	private int targetFPS = 120;
+	private int timeStep = (1000 / targetFPS);
+	private int physicsIterations = 200;
 	
 	public Game(String gamename) throws SlickException {
 		super(gamename);
@@ -102,21 +106,15 @@ public class Game extends BasicGame implements IGame {
 		
 		input.poll(gc.getWidth(), gc.getHeight());
 
-		float timeStep = 1.0f / 120.0f;
-		int velocityIterations = 6;
-		int positionIterations = 2;
-
 		for (int x = 0; x < entities.size(); x++) {
 			entities.get(x).update(input);
 		}
 		
 		for (int x = 0; x < entities.size(); x++) {
 			if (entities.get(x).getBody().m_type == BodyType.DYNAMIC) {
-				for (int j = 0; j < 120; ++j) {
-					world.step(timeStep, velocityIterations, positionIterations);
-					entities.get(x).setX(entities.get(x).getBody().getPosition().x-(entities.get(x).getImageWidth()/2));
-					entities.get(x).setY(entities.get(x).getBody().getPosition().y-(entities.get(x).getImageHeight()/2));
-				}
+				world.step(timeStep, physicsIterations, physicsIterations);
+				entities.get(x).setX(entities.get(x).getBody().getPosition().x-(entities.get(x).getImageWidth()/2));
+				entities.get(x).setY(entities.get(x).getBody().getPosition().y-(entities.get(x).getImageHeight()/2));
 			}
 		}
 
@@ -138,6 +136,8 @@ public class Game extends BasicGame implements IGame {
 		for (int x = 0; x < entities.size(); x++) {
 			entities.get(x).draw();
 		}
+		
+		g.drawString("Score: "+this.score, 100, 9);
 		
 		if(this.debug)
 		{
@@ -162,5 +162,9 @@ public class Game extends BasicGame implements IGame {
 	private void exit() {
 		gc.exit();
 		Main.exit();
+	}
+	
+	public void addScore(int value) {
+		this.score += value;
 	}
 }
