@@ -74,8 +74,9 @@ public class Game extends BasicGame implements IGame {
 	@Override
 	public void init(GameContainer gc) throws SlickException {
 		paddle = new Paddle(new Image("res/paddle.png"), this);
+		paddle.setScale(0.75f);
 		ball = new Ball(new Image("res/ball.png"), this);
-		ball.setScale(0.75f);
+		ball.setScale(0.6f);
 		this.gc = gc;
 		entities.add(paddle);
 		entities.add(ball);
@@ -85,14 +86,14 @@ public class Game extends BasicGame implements IGame {
 		//TODO: implement maps. :D
 		
 		for(int x = 0; x < 16; x++) {
-			for(int i = 22; i < (800-49); )
+			for(int i = 15; i < (800-49); )
 			{
 				brick = new Brick(BrickType.randomType(), this);				
 				brick.setScale((float) 0.75);
 				brick.setX(i);
-				brick.setY(brick.getImageHeight()*x+30);
+				brick.setY((brick.getImageHeight()+2)*x+30);
 				entities.add(brick);
-				i = (int) (i + brick.getImageWidth());
+				i = (int) (i + brick.getImageWidth()+1);
 			}
 		}
 		
@@ -115,6 +116,7 @@ public class Game extends BasicGame implements IGame {
 				world.step(timeStep, physicsIterations, physicsIterations);
 				entities.get(x).setX(entities.get(x).getBody().getPosition().x-(entities.get(x).getImageWidth()/2));
 				entities.get(x).setY(entities.get(x).getBody().getPosition().y-(entities.get(x).getImageHeight()/2));
+				entities.get(x).setAngle((float) Math.toDegrees(entities.get(x).getBody().getAngle()));
 			}
 		}
 
