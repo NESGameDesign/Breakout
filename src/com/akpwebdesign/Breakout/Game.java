@@ -89,12 +89,7 @@ public class Game extends BasicGame implements IGame {
 		
 		//TODO: implement maps. :D
 		
-
-		
-		JFileChooser example = new JFileChooser();
-		
-		example.showOpenDialog(null);
-		Map map = new Map(Map.loadMap(example.getSelectedFile().getAbsolutePath()));
+		Map map = new Map(Map.loadMap(this.getClass().getResourceAsStream("/res/maps/level1.map")));
 		
 		for(Coordinate coord : map.getCoordinates()) {
 			if(coord.isBrick()) {
