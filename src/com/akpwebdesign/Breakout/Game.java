@@ -1,7 +1,11 @@
 package com.akpwebdesign.Breakout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
@@ -17,7 +21,7 @@ import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
-import com.akpwebdesign.Breakout.entity.brick.BrickType;
+import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.GameCollisionListener;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
@@ -85,18 +89,22 @@ public class Game extends BasicGame implements IGame {
 		
 		//TODO: implement maps. :D
 		
-		for(int x = 0; x < 16; x++) {
-			for(int i = 15; i < (800-49); )
-			{
-				brick = new Brick(BrickType.randomType(), this);				
-				brick.setScale((float) 0.75);
-				brick.setX(i);
-				brick.setY((brick.getImageHeight()+2)*x+30);
+
+		
+		JFileChooser example = new JFileChooser();
+		
+		example.showOpenDialog(null);
+		Map map = new Map(Map.loadMap(example.getSelectedFile().getAbsolutePath()));
+		
+		for(Coordinate coord : map.getCoordinates()) {
+			if(coord.isBrick()) {
+				brick = new Brick(coord.getBrickType(), this);
+				brick.setX(coord.getX());
+				brick.setY(coord.getY());
 				entities.add(brick);
-				i = (int) (i + brick.getImageWidth()+1);
 			}
 		}
-		
+
 		this.initPhysics();
 	}
 
@@ -119,16 +127,19 @@ public class Game extends BasicGame implements IGame {
 				entities.get(x).setAngle((float) Math.toDegrees(entities.get(x).getBody().getAngle()));
 			}
 		}
-
-		if (input.isKeyDown(Input.KEY_ESCAPE)) {
+	}
+	
+	@Override
+	public void keyPressed(int key, char c) {
+		if (key == Input.KEY_ESCAPE) {
 			this.exitRequested = true;
 		}
-
-		if (input.isKeyDown(Input.KEY_F12)) {
+		
+		if (key == Input.KEY_F12) {
 			ScreenUtils.takeScreenshot();
 		}
 		
-		if (input.isKeyDown(Input.KEY_D)) {
+		if (key == Input.KEY_D) {
 			this.debug = !this.debug;
 		}
 	}
@@ -149,9 +160,9 @@ public class Game extends BasicGame implements IGame {
 
 	public void initPhysics() {
 		PhysicsUtils.addWall(-1, 0, 600, Math.toRadians(0), world);
-		PhysicsUtils.addWall(801, 0, 600, Math.toRadians(0), world);
-		PhysicsUtils.addWall(0, 601, 800, Math.toRadians(90), world);
-		PhysicsUtils.addWall(0, -1, 800, Math.toRadians(90), world);
+		PhysicsUtils.addWall(880, 0, 600, Math.toRadians(0), world);
+		PhysicsUtils.addWall(0, 601, 880, Math.toRadians(90), world);
+		PhysicsUtils.addWall(0, -1, 880, Math.toRadians(90), world);
 		
 		Slick2DJBox2DDebugDraw sDD = new Slick2DJBox2DDebugDraw(gc);
 		GameCollisionListener gcl = new GameCollisionListener();

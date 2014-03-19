@@ -18,7 +18,7 @@ public class Main {
 			DLL.loadJarDlls(DLL.getFileMap());
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(new Game("Breakout"));
-			appgc.setDisplayMode(800, 600, false);
+			appgc.setDisplayMode(879, 600, false);
 			appgc.setShowFPS(false);
 			appgc.setTargetFrameRate(120);
 			appgc.setShowFPS(true);
