@@ -11,10 +11,8 @@ import com.akpwebdesign.Breakout.dll.DLL;
 
 public class Main {
 
-	public static void main(String[] args)
-	{
-		try
-		{		
+	public static void main(String[] args) {
+		try {
 			DLL.loadJarDlls(DLL.getFileMap());
 			AppGameContainer appgc;
 			appgc = new AppGameContainer(new Game("Breakout"));
@@ -24,18 +22,18 @@ public class Main {
 			appgc.setShowFPS(true);
 			appgc.setMouseGrabbed(true);
 			appgc.start();
-		}
-		catch (SlickException ex)
-		{
+		} catch (SlickException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-	
+
 	public static void exit() {
-		try {Thread.sleep(250);} catch (InterruptedException e) {}
+		try {
+			Thread.sleep(250);
+		} catch (InterruptedException e) {
+		}
 		DLL.deleteDLLDir();
 	}
 }
