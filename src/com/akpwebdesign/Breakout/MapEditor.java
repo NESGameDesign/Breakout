@@ -5,34 +5,40 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+
 import org.jbox2d.dynamics.World;
-import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import com.akpwebdesign.Breakout.Coordinate;
 import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
 import com.akpwebdesign.Breakout.entity.brick.BrickType;
+import com.akpwebdesign.Breakout.gameStates.States;
 import com.akpwebdesign.Breakout.map.Map;
 
-public class MapEditor extends BasicGame implements IGame {
+public class MapEditor extends BasicGameState implements IGame {
 	private Input input = new Input(0);
 	private GameContainer gc = null;
 	private List<Entity> entities = new ArrayList<Entity>();
-	private boolean exitRequested = false;
 	private ArrayList<Coordinate> coords = new ArrayList<Coordinate>();
 	private Brick followMouseBrick = null;
 	private int gridHeight = 0;
 	private int gridWidth = 0;
 	private BrickType type = null;
+	private int state;
+	private StateBasedGame game;
 
-	public MapEditor(String gamename) throws SlickException {
-		super(gamename);
+	public MapEditor(States state) {
+		this.state = state.getStateID();
 	}
 
 	public List<Entity> getEntities() {
@@ -44,7 +50,8 @@ public class MapEditor extends BasicGame implements IGame {
 	}
 
 	@Override
-	public void init(GameContainer gc) throws SlickException {
+	public void init(GameContainer gc, StateBasedGame game) throws SlickException {		
+		this.game = game;
 		this.gc = gc;
 		this.followMouseBrick = new Brick(BrickType.RED, this);
 		this.followMouseBrick.getImage().setAlpha(0.5f);
@@ -54,11 +61,7 @@ public class MapEditor extends BasicGame implements IGame {
 	}
 
 	@Override
-	public void update(GameContainer gc, int i) throws SlickException {
-		if (this.exitRequested) {
-			exit();
-		}
-
+	public void update(GameContainer gc, StateBasedGame game, int i) throws SlickException {
 		input.poll(gc.getWidth(), gc.getHeight());
 
 		float x = (float) (Math.floor((input.getMouseX() / this.gridWidth)) * gridWidth);
@@ -72,7 +75,7 @@ public class MapEditor extends BasicGame implements IGame {
 	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
-			this.exitRequested = true;
+			this.exit();
 		}
 
 		if (key == Input.KEY_S) {
@@ -117,7 +120,7 @@ public class MapEditor extends BasicGame implements IGame {
 	}
 
 	@Override
-	public void render(GameContainer gc, Graphics g) throws SlickException {
+	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
 		for (int x = 0; x < entities.size(); x++) {
 			entities.get(x).draw();
 		}
@@ -184,8 +187,7 @@ public class MapEditor extends BasicGame implements IGame {
 	}
 
 	private void exit() {
-		gc.exit();
-		Main.exit();
+		game.enterState(States.MAIN_MENU.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
 
 	@Override
@@ -234,5 +236,10 @@ public class MapEditor extends BasicGame implements IGame {
 
 	public void setGridHeight(int gridHeight) {
 		this.gridHeight = gridHeight;
+	}
+
+	@Override
+	public int getID() {
+		return state;
 	}
 }
