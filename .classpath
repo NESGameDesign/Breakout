@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/BreakoutEngineCore"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/lwjgl_util.jar"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/lwjgl.jar"/>
-	<classpathentry kind="lib" path="/BreakoutEngineCore/lib/lib/slick.jar"/>
+	<classpathentry kind="src" path="lib"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jbox2d-library"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="lib" path="lib/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="lib/lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="lib/lib/lwjgl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Breakout/lib/lib/natives"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/lib/slick.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
