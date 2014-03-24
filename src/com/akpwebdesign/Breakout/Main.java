@@ -21,7 +21,7 @@ public class Main {
 		}
 		
 		try {
-			AppGameContainer appgc = new AppGameContainer( new Game("Breakout"));
+			AppGameContainer appgc = new AppGameContainer(new Breakout("Breakout"));
 			boolean editor = false;
 			
 			for (String arg : args)
@@ -31,7 +31,7 @@ public class Main {
 			}
 			
 			if(editor) {
-				appgc = new AppGameContainer(new MapEditor("Breakout Map Editor"));
+				//appgc = new AppGameContainer(new MapEditor("Breakout Map Editor"));
 			}
 			
 			appgc.setDisplayMode(879, 600, false);
