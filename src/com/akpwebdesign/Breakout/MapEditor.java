@@ -22,6 +22,7 @@ import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
 import com.akpwebdesign.Breakout.entity.brick.BrickType;
+import com.akpwebdesign.Breakout.gameStates.States;
 import com.akpwebdesign.Breakout.map.Map;
 
 public class MapEditor extends BasicGameState implements IGame {
@@ -36,8 +37,8 @@ public class MapEditor extends BasicGameState implements IGame {
 	private int state;
 	private StateBasedGame game;
 
-	public MapEditor(int state) {
-		this.state = state;
+	public MapEditor(States state) {
+		this.state = state.getStateID();
 	}
 
 	public List<Entity> getEntities() {
@@ -186,7 +187,7 @@ public class MapEditor extends BasicGameState implements IGame {
 	}
 
 	private void exit() {
-		game.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		game.enterState(States.MAIN_MENU.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
 
 	@Override

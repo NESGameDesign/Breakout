@@ -21,6 +21,7 @@ import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
+import com.akpwebdesign.Breakout.gameStates.States;
 import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.GameCollisionListener;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
@@ -43,8 +44,8 @@ public class Game extends BasicGameState implements IGame {
 	private int state;
 	private StateBasedGame game;
 	
-	public Game(int state) {
-		this.state = state;
+	public Game(States state) {
+		this.state = state.getStateID();
 	}
 
 	@Override
@@ -146,7 +147,7 @@ public class Game extends BasicGameState implements IGame {
 	}
 
 	private void exit() {
-		game.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+		game.enterState(States.MAIN_MENU.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	}
 
 	public void addScore(int value) {

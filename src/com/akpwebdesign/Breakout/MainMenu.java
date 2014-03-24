@@ -10,12 +10,14 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import com.akpwebdesign.Breakout.gameStates.States;
+
 public class MainMenu extends BasicGameState {
-	private StateBasedGame game; // stored for later use
+	private StateBasedGame game;
 	private int state;
 	
-	public MainMenu(int state) {
-		this.state = state;
+	public MainMenu(States state) {
+		this.state = state.getStateID();
 	}
 	 
 	@Override
@@ -50,7 +52,7 @@ public class MainMenu extends BasicGameState {
 	public void keyReleased(int key, char c) {
 	    switch(key) {
 	    case Input.KEY_1:
-	        game.enterState(1);
+	        game.enterState(States.GAME.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	        break;
 	    case Input.KEY_2:
 	        // TODO: Implement high scores
@@ -61,7 +63,7 @@ public class MainMenu extends BasicGameState {
 	        game.getContainer().exit();
 	        break;
 	    case Input.KEY_M:
-	    	game.enterState(2);
+	    	game.enterState(States.EDITOR.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	    default:
 	        break;
 	    }
