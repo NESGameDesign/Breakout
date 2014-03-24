@@ -12,19 +12,34 @@ import com.akpwebdesign.Breakout.dll.DLL;
 public class Main {
 
 	public static void main(String[] args) {
+
 		try {
 			DLL.loadJarDlls(DLL.getFileMap());
-			AppGameContainer appgc;
-			appgc = new AppGameContainer(new Game("Breakout"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			AppGameContainer appgc = new AppGameContainer( new Game("Breakout"));
+			boolean editor = false;
+			
+			for (String arg : args)
+			{
+				if(arg.equals("-editor"))
+					editor = true;
+			}
+			
+			if(editor) {
+				appgc = new AppGameContainer(new MapEditor("Breakout Map Editor"));
+			}
+			
 			appgc.setDisplayMode(879, 600, false);
-			appgc.setShowFPS(false);
 			appgc.setTargetFrameRate(120);
 			appgc.setShowFPS(true);
-			appgc.setMouseGrabbed(true);
+			appgc.setMouseGrabbed(!editor);
 			appgc.start();
 		} catch (SlickException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (IOException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
