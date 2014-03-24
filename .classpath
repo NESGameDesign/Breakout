@@ -13,5 +13,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/lib/slick.jar"/>
+	<classpathentry kind="lib" path="lib/lib/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="lib/lib/stripe-java-latest.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
