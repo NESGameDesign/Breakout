@@ -12,7 +12,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
@@ -28,7 +27,9 @@ import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
 
-public class Game extends BasicGameState implements IGame {
+import de.matthiasmann.twl.TWLSlick.BasicTWLGameState;
+
+public class Game extends BasicTWLGameState implements IGame {
 	private Input input = new Input(0);
 	private Paddle paddle = null;
 	private Ball ball = null;
@@ -52,6 +53,8 @@ public class Game extends BasicGameState implements IGame {
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		this.game = game;
 		this.gc = gc;
+		
+		gc.setMouseGrabbed(true);
 		
 		paddle = new Paddle(new Image("res/paddle.png"), this);
 		paddle.setScale(0.75f);
@@ -81,7 +84,8 @@ public class Game extends BasicGameState implements IGame {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame game, int i) throws SlickException {
-
+		gc.setMouseGrabbed(true);
+		
 		input.poll(gc.getWidth(), gc.getHeight());
 
 		for (int x = 0; x < entities.size(); x++) {
@@ -187,5 +191,4 @@ public class Game extends BasicGameState implements IGame {
 	public void setBricksBroken(int bricksBroken) {
 		this.bricksBroken = bricksBroken;
 	}
-
 }

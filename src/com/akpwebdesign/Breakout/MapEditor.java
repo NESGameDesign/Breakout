@@ -12,12 +12,10 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
@@ -25,7 +23,9 @@ import com.akpwebdesign.Breakout.entity.brick.BrickType;
 import com.akpwebdesign.Breakout.gameStates.States;
 import com.akpwebdesign.Breakout.map.Map;
 
-public class MapEditor extends BasicGameState implements IGame {
+import de.matthiasmann.twl.TWLSlick.BasicTWLGameState;
+
+public class MapEditor extends BasicTWLGameState implements IGame {
 	private Input input = new Input(0);
 	private GameContainer gc = null;
 	private List<Entity> entities = new ArrayList<Entity>();
@@ -70,6 +70,7 @@ public class MapEditor extends BasicGameState implements IGame {
 
 		this.followMouseBrick.setX(x);
 		this.followMouseBrick.setY(y);
+		gc.setMouseGrabbed(false);
 	}
 
 	@Override

@@ -22,22 +22,10 @@ public class Main {
 		
 		try {
 			AppGameContainer appgc = new AppGameContainer(new Breakout("Breakout"));
-			boolean editor = false;
-			
-			for (String arg : args)
-			{
-				if(arg.equals("-editor"))
-					editor = true;
-			}
-			
-			if(editor) {
-				//appgc = new AppGameContainer(new MapEditor("Breakout Map Editor"));
-			}
-			
 			appgc.setDisplayMode(879, 600, false);
 			appgc.setTargetFrameRate(120);
 			appgc.setShowFPS(true);
-			appgc.setMouseGrabbed(!editor);
+			appgc.setMouseGrabbed(true);
 			appgc.start();
 		} catch (SlickException ex) {
 			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);

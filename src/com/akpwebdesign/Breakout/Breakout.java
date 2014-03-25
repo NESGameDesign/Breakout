@@ -1,14 +1,17 @@
 package com.akpwebdesign.Breakout;
 
+import java.net.URL;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
 
 import com.akpwebdesign.Breakout.gameStates.States;
 
-public class Breakout extends StateBasedGame {
+import de.matthiasmann.twl.TWLSlick.TWLStateBasedGame;
 
-	public Breakout(String name) {
+public class Breakout extends TWLStateBasedGame {
+
+	public Breakout(String name) throws SlickException {
 		super(name);
 	}
 
@@ -17,6 +20,11 @@ public class Breakout extends StateBasedGame {
 		this.addState(new MainMenu(States.MAIN_MENU));
 		this.addState(new Game(States.GAME));
 		this.addState(new MapEditor(States.EDITOR));
+	}
+
+	@Override
+	protected URL getThemeURL() {
+		return Breakout.class.getResource("/res/ui/theme.xml");
 	}
 
 }
