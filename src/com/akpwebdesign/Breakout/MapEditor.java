@@ -101,20 +101,22 @@ public class MapEditor extends BasicGameState implements IGame {
 		JFileChooser example = new JFileChooser();
 
 		example.showOpenDialog(null);
-		coords = Map.loadMap(example.getSelectedFile().getAbsolutePath())
-				.getCoordinates();
+		if (example.getSelectedFile() != null) {
+			coords = Map.loadMap(example.getSelectedFile().getAbsolutePath())
+					.getCoordinates();
 
-		this.getEntities().clear();
+			this.getEntities().clear();
 
-		for (Coordinate coord : coords) {
-			Brick brick;
-			try {
-				brick = new Brick(coord.getBrickType(), this);
-				brick.setX(coord.getX());
-				brick.setY(coord.getY());
-				this.getEntities().add(brick);
-			} catch (SlickException e) {
-				e.printStackTrace();
+			for (Coordinate coord : coords) {
+				Brick brick;
+				try {
+					brick = new Brick(coord.getBrickType(), this);
+					brick.setX(coord.getX());
+					brick.setY(coord.getY());
+					this.getEntities().add(brick);
+				} catch (SlickException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -177,8 +179,10 @@ public class MapEditor extends BasicGameState implements IGame {
 		JFileChooser example = new JFileChooser();
 
 		example.showOpenDialog(null);
-		Map.saveMap(new Map(coords), example.getSelectedFile()
-				.getAbsolutePath());
+		if(example.getSelectedFile() != null) {
+			Map.saveMap(new Map(coords), example.getSelectedFile()
+					.getAbsolutePath());
+		}
 	}
 
 	private void clear() {
