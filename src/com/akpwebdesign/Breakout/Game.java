@@ -43,6 +43,7 @@ public class Game extends BasicGameState implements IGame {
 	private int physicsIterations = 200;
 	private int state;
 	private StateBasedGame game;
+	private int lives = 5;
 	
 	public Game(States state) {
 		this.state = state.getStateID();
@@ -111,6 +112,7 @@ public class Game extends BasicGameState implements IGame {
 		}
 
 		g.drawString("Score: " + this.score, 100, 9);
+		g.drawString("Lives: " + this.lives, 300, 9);
 
 		if (this.debug) {
 			world.drawDebugData();
@@ -187,5 +189,12 @@ public class Game extends BasicGameState implements IGame {
 	public void setBricksBroken(int bricksBroken) {
 		this.bricksBroken = bricksBroken;
 	}
-
+	
+	public void removeLife() {
+		this.lives--;
+	}
+	
+	public void addLife() {
+		this.lives++;
+	}
 }

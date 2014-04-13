@@ -242,4 +242,12 @@ public class MapEditor extends BasicGameState implements IGame {
 	public int getID() {
 		return state;
 	}
+
+	@Override
+	public void addLife() {		
+	}
+
+	@Override
+	public void removeLife() {
+	}
 }

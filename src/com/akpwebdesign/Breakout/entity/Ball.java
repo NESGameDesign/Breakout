@@ -16,8 +16,8 @@ public class Ball extends Entity {
 
 	public Ball(Image image, IGame game) {
 		super(image, game);
-		this.setX(9999);
-		this.setY(9999);
+		this.setX(-999);
+		this.setY(-999);
 		this.initPhysics();
 	}
 
@@ -30,6 +30,7 @@ public class Ball extends Entity {
 		if (this.getY() + this.getImageHeight() + 3 >= this.getGame().getGC()
 				.getHeight()) {
 			this.lockedToPaddle = true;
+			this.getGame().removeLife();
 		}
 
 		if (this.lockedToPaddle) {
