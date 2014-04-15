@@ -1,4 +1,4 @@
-package com.akpwebdesign.Breakout;
+package com.akpwebdesign.Breakout.gameStates;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,10 +22,10 @@ import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
 import com.akpwebdesign.Breakout.entity.brick.BrickType;
-import com.akpwebdesign.Breakout.gameStates.States;
+import com.akpwebdesign.Breakout.map.Coordinate;
 import com.akpwebdesign.Breakout.map.Map;
 
-public class MapEditor extends BasicGameState implements IGame {
+public class MapEditorGameState extends BasicGameState implements IGame {
 	private Input input = new Input(0);
 	private GameContainer gc = null;
 	private List<Entity> entities = new ArrayList<Entity>();
@@ -37,7 +37,7 @@ public class MapEditor extends BasicGameState implements IGame {
 	private int state;
 	private StateBasedGame game;
 
-	public MapEditor(States state) {
+	public MapEditorGameState(States state) {
 		this.state = state.getStateID();
 	}
 

@@ -8,6 +8,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 import com.akpwebdesign.Breakout.dll.DLL;
+import com.akpwebdesign.Breakout.gameStates.GameGameState;
 
 public class Main {
 
@@ -29,7 +30,7 @@ public class Main {
 			appgc.setMouseGrabbed(true);
 			appgc.start();
 		} catch (SlickException ex) {
-			Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(GameGameState.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 

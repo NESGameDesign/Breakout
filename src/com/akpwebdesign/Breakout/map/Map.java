@@ -10,8 +10,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import com.akpwebdesign.Breakout.Coordinate;
-
 public class Map implements Serializable {
 
 	/**

@@ -1,4 +1,4 @@
-package com.akpwebdesign.Breakout;
+package com.akpwebdesign.Breakout.gameStates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +14,19 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
-import com.akpwebdesign.Breakout.gameStates.States;
+import com.akpwebdesign.Breakout.map.Coordinate;
 import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.GameCollisionListener;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
 
-public class Game extends BasicGameState implements IGame {
+public class GameGameState extends BasicGameState implements IGame {
 	private Input input = new Input(0);
 	private Paddle paddle = null;
 	private Ball ball = null;
@@ -42,7 +43,7 @@ public class Game extends BasicGameState implements IGame {
 	private StateBasedGame game;
 	private int lives = 5;
 	
-	public Game(States state) {
+	public GameGameState(States state) {
 		this.state = state.getStateID();
 	}
 
@@ -101,7 +102,7 @@ public class Game extends BasicGameState implements IGame {
 		}
 		
 		if (this.lives <= 0) {
-			this.exit();
+			this.loseGame();
 		}
 	}
 	
@@ -209,4 +210,10 @@ public class Game extends BasicGameState implements IGame {
 		this.score = 0;
 		this.bricksBroken = 0;
 	}
+	
+	private void loseGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

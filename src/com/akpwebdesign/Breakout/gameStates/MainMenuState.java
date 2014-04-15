@@ -1,4 +1,4 @@
-package com.akpwebdesign.Breakout;
+package com.akpwebdesign.Breakout.gameStates;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -10,13 +10,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import com.akpwebdesign.Breakout.gameStates.States;
+import com.akpwebdesign.Breakout.Main;
 
-public class MainMenu extends BasicGameState {
+public class MainMenuState extends BasicGameState {
 	private StateBasedGame game;
 	private int state;
 	
-	public MainMenu(States state) {
+	public MainMenuState(States state) {
 		this.state = state.getStateID();
 	}
 	 
