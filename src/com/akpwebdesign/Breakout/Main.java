@@ -36,7 +36,7 @@ public class Main {
 			
 			appgc.setDisplayMode(879, 600, false);
 			appgc.setTargetFrameRate(120);
-			appgc.setShowFPS(false);
+			appgc.setShowFPS(true);
 			appgc.setMouseGrabbed(!editor);
 			appgc.start();
 		} catch (SlickException ex) {
