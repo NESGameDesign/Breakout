@@ -4,7 +4,8 @@ public enum States {
 	SPLASH(0),
 	MAIN_MENU(1),
 	GAME(2),
-	EDITOR(3);
+	PAUSE_MENU(3),
+	EDITOR(4);
 	
 	private int stateID;
 	

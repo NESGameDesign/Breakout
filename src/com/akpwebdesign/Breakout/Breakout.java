@@ -15,6 +15,7 @@ public class Breakout extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		this.addState(new MainMenu(States.MAIN_MENU));
+		this.addState(new PauseScreenState(States.PAUSE_MENU));
 		this.addState(new Game(States.GAME));
 		this.addState(new MapEditor(States.EDITOR));
 	}

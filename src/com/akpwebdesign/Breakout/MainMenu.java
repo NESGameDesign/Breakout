@@ -33,8 +33,7 @@ public class MainMenu extends BasicGameState {
 	    g.drawString("Breakout", 50, 50);
 	 
 	    g.drawString("1. Play Game", 50, 100);
-	    g.drawString("2. High Scores [NYI]", 50, 120);
-	    g.drawString("3. Quit", 50, 140);
+	    g.drawString("2. Quit", 50, 120);
 	}
 
 	@Override
@@ -54,11 +53,8 @@ public class MainMenu extends BasicGameState {
 	    case Input.KEY_1:
 	        game.enterState(States.GAME.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	        break;
-	    case Input.KEY_2:
-	        // TODO: Implement high scores
-	        break;
 	    case Input.KEY_ESCAPE:
-	    case Input.KEY_3:
+	    case Input.KEY_2:
 	    	Main.exit();
 	        game.getContainer().exit();
 	        break;
