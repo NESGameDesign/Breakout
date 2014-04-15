@@ -103,6 +103,10 @@ public class Game extends BasicGameState implements IGame {
 								.getAngle()));
 			}
 		}
+		
+		if (this.lives <= 0) {
+			this.exit();
+		}
 	}
 	
 	@Override
