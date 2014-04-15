@@ -6,7 +6,6 @@ import java.util.List;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.World;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -14,8 +13,6 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
@@ -50,6 +47,7 @@ public class Game extends BasicGameState implements IGame {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
+		this.clearState();
 		this.game = game;
 		this.gc = gc;
 		
@@ -59,8 +57,6 @@ public class Game extends BasicGameState implements IGame {
 		ball.setScale(0.6f);
 		entities.add(paddle);
 		entities.add(ball);
-		
-		System.out.println("Init!");
 		
 		Brick brick = null;
 
@@ -120,7 +116,7 @@ public class Game extends BasicGameState implements IGame {
 	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_ESCAPE) {
-			exit();
+			pause();
 		}
 
 		if (key == Input.KEY_F12) {
@@ -146,8 +142,8 @@ public class Game extends BasicGameState implements IGame {
 		world.setContactListener(gcl);
 	}
 
-	private void exit() {
-		game.enterState(States.MAIN_MENU.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+	private void pause() {
+		game.enterState(States.PAUSE_MENU.getStateID());
 	}
 
 	public void addScore(int value) {
@@ -188,4 +184,15 @@ public class Game extends BasicGameState implements IGame {
 		this.bricksBroken = bricksBroken;
 	}
 
+	private void clearState() {
+		this.gc = null;
+		this.game = null;
+		this.paddle = null;
+		this.ball = null;
+		entities.clear();
+		this.world = new World(new Vec2(0.0f, 0.0f));
+		this.debug = false;
+		this.score = 0;
+		this.bricksBroken = 0;
+	}
 }
