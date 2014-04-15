@@ -1,4 +1,4 @@
-package com.akpwebdesign.Breakout.map;
+package com.akpwebdesign.Breakout;
 
 import java.io.Serializable;
 

@@ -17,12 +17,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import com.akpwebdesign.Breakout.Coordinate;
 import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
 import com.akpwebdesign.Breakout.entity.brick.BrickType;
-import com.akpwebdesign.Breakout.map.Coordinate;
 import com.akpwebdesign.Breakout.map.Map;
 
 public class MapEditorGameState extends BasicGameState implements IGame {

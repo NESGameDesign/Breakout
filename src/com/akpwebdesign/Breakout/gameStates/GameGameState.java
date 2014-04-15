@@ -14,12 +14,12 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.akpwebdesign.Breakout.Coordinate;
 import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
-import com.akpwebdesign.Breakout.map.Coordinate;
 import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.GameCollisionListener;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
@@ -152,6 +152,10 @@ public class GameGameState extends BasicGameState implements IGame {
 	private void pause() {
 		game.enterState(States.PAUSE_MENU.getStateID());
 	}
+	
+	private void loseGame() {
+		game.enterState(States.LOSE_GAME.getStateID());
+	}
 
 	public void addScore(int value) {
 		this.score += value;
@@ -209,11 +213,7 @@ public class GameGameState extends BasicGameState implements IGame {
 		this.debug = false;
 		this.score = 0;
 		this.bricksBroken = 0;
-	}
-	
-	private void loseGame() {
-		// TODO Auto-generated method stub
-		
+		this.lives = 5;
 	}
 
 }
