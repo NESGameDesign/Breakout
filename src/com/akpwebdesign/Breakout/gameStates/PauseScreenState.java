@@ -1,4 +1,4 @@
-package com.akpwebdesign.Breakout;
+package com.akpwebdesign.Breakout.gameStates;
 
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -9,8 +9,6 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
-
-import com.akpwebdesign.Breakout.gameStates.States;
 
 public class PauseScreenState extends BasicGameState {
 

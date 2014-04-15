@@ -1,4 +1,4 @@
-package com.akpwebdesign.Breakout;
+package com.akpwebdesign.Breakout.gameStates;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +14,19 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.akpwebdesign.Breakout.Coordinate;
+import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
 import com.akpwebdesign.Breakout.entity.Paddle;
 import com.akpwebdesign.Breakout.entity.brick.Brick;
-import com.akpwebdesign.Breakout.gameStates.States;
 import com.akpwebdesign.Breakout.map.Map;
 import com.akpwebdesign.Breakout.physics.GameCollisionListener;
 import com.akpwebdesign.Breakout.physics.PhysicsUtils;
 import com.akpwebdesign.Breakout.screen.ScreenUtils;
 import com.akpwebdesign.Breakout.screen.Slick2DJBox2DDebugDraw;
 
-public class Game extends BasicGameState implements IGame {
+public class GameGameState extends BasicGameState implements IGame {
 	private Input input = new Input(0);
 	private Paddle paddle = null;
 	private Ball ball = null;
@@ -40,8 +41,9 @@ public class Game extends BasicGameState implements IGame {
 	private int physicsIterations = 200;
 	private int state;
 	private StateBasedGame game;
+	private int lives = 5;
 	
-	public Game(States state) {
+	public GameGameState(States state) {
 		this.state = state.getStateID();
 	}
 
@@ -98,6 +100,10 @@ public class Game extends BasicGameState implements IGame {
 								.getAngle()));
 			}
 		}
+		
+		if (this.lives <= 0) {
+			this.loseGame();
+		}
 	}
 	
 	@Override
@@ -107,6 +113,7 @@ public class Game extends BasicGameState implements IGame {
 		}
 
 		g.drawString("Score: " + this.score, 100, 9);
+		g.drawString("Lives: " + this.lives, 300, 9);
 
 		if (this.debug) {
 			world.drawDebugData();
@@ -144,6 +151,10 @@ public class Game extends BasicGameState implements IGame {
 
 	private void pause() {
 		game.enterState(States.PAUSE_MENU.getStateID());
+	}
+	
+	private void loseGame() {
+		game.enterState(States.LOSE_GAME.getStateID());
 	}
 
 	public void addScore(int value) {
@@ -183,6 +194,14 @@ public class Game extends BasicGameState implements IGame {
 	public void setBricksBroken(int bricksBroken) {
 		this.bricksBroken = bricksBroken;
 	}
+	
+	public void removeLife() {
+		this.lives--;
+	}
+	
+	public void addLife() {
+		this.lives++;
+	}
 
 	private void clearState() {
 		this.gc = null;
@@ -194,5 +213,7 @@ public class Game extends BasicGameState implements IGame {
 		this.debug = false;
 		this.score = 0;
 		this.bricksBroken = 0;
+		this.lives = 5;
 	}
+
 }

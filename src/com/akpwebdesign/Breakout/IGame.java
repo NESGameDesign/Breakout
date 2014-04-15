@@ -26,5 +26,9 @@ public interface IGame {
 	public void initPhysics();
 
 	public void addScore(int value);
+	
+	public void addLife();
+	
+	public void removeLife();
 
 }
