@@ -10,6 +10,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import com.akpwebdesign.Breakout.GameLevel;
+
 public class LoseGameState extends BasicGameState {
 	
 	private GameContainer gc;
@@ -53,6 +55,7 @@ public class LoseGameState extends BasicGameState {
 	public void keyReleased(int key, char c) {
 	    switch(key) {
 	    case Input.KEY_1:
+	    	((GameGameState)game.getState(States.GAME.getStateID())).setLevel(GameLevel.LVL1);
 	    	try {game.getState(States.GAME.getStateID()).init(gc, game);}
 	    	catch (SlickException e) {e.printStackTrace();}
 	        game.enterState(States.GAME.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));

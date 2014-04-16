@@ -70,6 +70,7 @@ public class MapEditorGameState extends BasicGameState implements IGame {
 
 		this.followMouseBrick.setX(x);
 		this.followMouseBrick.setY(y);
+		gc.setMouseGrabbed(false);
 	}
 
 	@Override
@@ -253,5 +254,9 @@ public class MapEditorGameState extends BasicGameState implements IGame {
 
 	@Override
 	public void removeLife() {
+	}
+
+	@Override
+	public void resetLives() {
 	}
 }

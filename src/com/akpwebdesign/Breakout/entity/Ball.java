@@ -51,8 +51,8 @@ public class Ball extends Entity {
 								new Vec2((this.getX() - (this.getGame().getGC()
 										.getWidth() / 2)) * 4,
 										(500 + (this.getGame()
-												.getBricksBroken())) * -2),
-								this.getBody().getPosition(), true);
+												.getBricksBroken())) * -2).mul(0.025f),
+								this.getBody().getPosition(), false);
 			}
 		}
 	}
