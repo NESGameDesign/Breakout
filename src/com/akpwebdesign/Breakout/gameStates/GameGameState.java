@@ -155,13 +155,13 @@ public class GameGameState extends BasicGameState implements IGame {
 			ScreenUtils.takeScreenshot();
 		}
 
-		if (key == Input.KEY_D) {
-			this.debug = !this.debug;
-		}
-		
-		if (key == Input.KEY_C) {
-			this.changeLevel();
-		}
+//		if (key == Input.KEY_D) {
+//			this.debug = !this.debug;
+//		}
+//		
+//		if (key == Input.KEY_C) {
+//			this.changeLevel();
+//		}
 		
 		if(code.checkCode(key)) {
 			this.codeFound = true;
