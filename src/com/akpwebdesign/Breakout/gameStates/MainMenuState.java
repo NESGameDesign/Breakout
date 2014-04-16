@@ -10,9 +10,11 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import com.akpwebdesign.Breakout.GameLevel;
 import com.akpwebdesign.Breakout.Main;
 
 public class MainMenuState extends BasicGameState {
+	private GameContainer gc;
 	private StateBasedGame game;
 	private int state;
 	
@@ -24,6 +26,7 @@ public class MainMenuState extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 	        throws SlickException {
 	    this.game = game;
+	    this.gc = container;
 	}
 
 	@Override
@@ -39,7 +42,7 @@ public class MainMenuState extends BasicGameState {
 	@Override
 	public void update(GameContainer arg0, StateBasedGame arg1, int arg2)
 			throws SlickException {
-		// TODO Auto-generated method stub
+		gc.setMouseGrabbed(true);
 
 	}
 
@@ -51,6 +54,9 @@ public class MainMenuState extends BasicGameState {
 	public void keyReleased(int key, char c) {
 	    switch(key) {
 	    case Input.KEY_1:
+	    	((GameGameState)game.getState(States.GAME.getStateID())).setLevel(GameLevel.LVL1);
+	    	try {((GameGameState)game.getState(States.GAME.getStateID())).init(gc, game);} 
+	    	catch (SlickException e) {e.printStackTrace();}
 	        game.enterState(States.GAME.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	        break;
 	    case Input.KEY_ESCAPE:

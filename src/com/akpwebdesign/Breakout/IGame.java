@@ -30,5 +30,7 @@ public interface IGame {
 	public void addLife();
 	
 	public void removeLife();
+	
+	public void resetLives();
 
 }

@@ -14,7 +14,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import com.akpwebdesign.Breakout.Code;
 import com.akpwebdesign.Breakout.Coordinate;
+import com.akpwebdesign.Breakout.GameLevel;
 import com.akpwebdesign.Breakout.IGame;
 import com.akpwebdesign.Breakout.entity.Ball;
 import com.akpwebdesign.Breakout.entity.Entity;
@@ -34,6 +36,7 @@ public class GameGameState extends BasicGameState implements IGame {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private World world = new World(new Vec2(0.0f, 0.0f));
 	private int bricksBroken = 0;
+	private int bricks = 0;
 	private int score = 0;
 	private boolean debug = false;
 	private int targetFPS = 120;
@@ -42,9 +45,15 @@ public class GameGameState extends BasicGameState implements IGame {
 	private int state;
 	private StateBasedGame game;
 	private int lives = 5;
+	private Code code = new Code();
+	private Map map;
+	private ArrayList<GameLevel> gameLevelList = new ArrayList<GameLevel>();
+	private GameLevel currentLevel;
+	private boolean codeFound;
 	
 	public GameGameState(States state) {
 		this.state = state.getStateID();
+		this.setLevel(GameLevel.LVL1);
 	}
 
 	@Override
@@ -61,20 +70,32 @@ public class GameGameState extends BasicGameState implements IGame {
 		entities.add(ball);
 		
 		Brick brick = null;
+		
+		this.setMap(new Map(Map.loadMap(this.getClass().getResourceAsStream(
+				"/res/maps/"+currentLevel.getLevelName()))));
 
-		Map map = new Map(Map.loadMap(this.getClass().getResourceAsStream(
-				"/res/maps/level1.map")));
-
-		for (Coordinate coord : map.getCoordinates()) {
+		for (Coordinate coord : this.getMap().getCoordinates()) {
 			if (coord.isBrick()) {
 				brick = new Brick(coord.getBrickType(), this);
 				brick.setX(coord.getX());
 				brick.setY(coord.getY());
 				entities.add(brick);
+				this.bricks++;
 			}
 		}
 
 		this.initPhysics();
+		
+		this.gameLevelList.add(GameLevel.LVL1);
+		this.gameLevelList.add(GameLevel.LVL2);
+		this.gameLevelList.add(GameLevel.LVL3);
+		this.gameLevelList.add(GameLevel.LVL4);
+		this.gameLevelList.add(GameLevel.LVL5);
+		this.gameLevelList.add(GameLevel.LVL6);
+		this.gameLevelList.add(GameLevel.LVL7);
+		this.gameLevelList.add(GameLevel.LVL8);
+		this.gameLevelList.add(GameLevel.LVL9);
+		this.gameLevelList.add(GameLevel.LVL10);
 	}
 
 	@Override
@@ -104,6 +125,10 @@ public class GameGameState extends BasicGameState implements IGame {
 		if (this.lives <= 0) {
 			this.loseGame();
 		}
+		
+		if (this.bricks == this.bricksBroken) {
+			this.changeLevel();
+		}
 	}
 	
 	@Override
@@ -132,6 +157,29 @@ public class GameGameState extends BasicGameState implements IGame {
 
 		if (key == Input.KEY_D) {
 			this.debug = !this.debug;
+		}
+		
+		if (key == Input.KEY_C) {
+			this.changeLevel();
+		}
+		
+		if(code.checkCode(key)) {
+			this.codeFound = true;
+		}
+		
+		if(this.codeFound && this.currentLevel != GameLevel.CAZIF) {
+			this.setLevel(GameLevel.CAZIF);
+			GameContainer gc = this.getGC();
+			StateBasedGame game = this.game;
+			this.clearState();
+			
+			try {this.init(gc, game);} 
+			catch (SlickException e) {e.printStackTrace();}
+			
+			this.lives = Integer.MAX_VALUE;
+			this.bricksBroken += 5000;
+			
+			this.codeFound = false;
 		}
 	}
 
@@ -213,7 +261,39 @@ public class GameGameState extends BasicGameState implements IGame {
 		this.debug = false;
 		this.score = 0;
 		this.bricksBroken = 0;
-		this.lives = 5;
+		this.bricks = 0;
+		this.gameLevelList.clear();
 	}
 
+	public Map getMap() {
+		return map;
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
+	}
+	
+	public void setLevel(GameLevel level) {
+		this.currentLevel = level;
+	}
+	
+	public void resetLives() {
+		this.lives = 5;
+	}
+	
+	private void changeLevel() {
+		boolean change = false;
+		for(GameLevel lvl : this.gameLevelList) {
+			if(change) {
+				change = false;
+				((LevelChangeState)game.getState(States.LEVEL_CHANGE.getStateID())).setLevel(lvl);
+				game.enterState(States.LEVEL_CHANGE.getStateID());
+				return;
+			}
+			if(lvl == this.currentLevel) {
+				change = true;
+			}
+		}
+		game.enterState(States.WIN_GAME.getStateID());
+	}
 }

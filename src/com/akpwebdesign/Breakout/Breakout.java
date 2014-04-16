@@ -4,12 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-import com.akpwebdesign.Breakout.gameStates.GameGameState;
-import com.akpwebdesign.Breakout.gameStates.LoseGameState;
-import com.akpwebdesign.Breakout.gameStates.MainMenuState;
-import com.akpwebdesign.Breakout.gameStates.MapEditorGameState;
-import com.akpwebdesign.Breakout.gameStates.PauseScreenState;
-import com.akpwebdesign.Breakout.gameStates.States;
+import com.akpwebdesign.Breakout.gameStates.*;
 
 public class Breakout extends StateBasedGame {
 
@@ -23,7 +18,9 @@ public class Breakout extends StateBasedGame {
 		this.addState(new PauseScreenState(States.PAUSE_MENU));
 		this.addState(new GameGameState(States.GAME));
 		this.addState(new LoseGameState(States.LOSE_GAME));
+		this.addState(new WinGameState(States.WIN_GAME));
 		this.addState(new MapEditorGameState(States.EDITOR));
+		this.addState(new LevelChangeState(States.LEVEL_CHANGE));
 	}
 
 }

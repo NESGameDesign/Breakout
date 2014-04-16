@@ -7,7 +7,8 @@ public enum States {
 	PAUSE_MENU(3),
 	LOSE_GAME(4),
 	WIN_GAME(5),
-	EDITOR(6);
+	EDITOR(6),
+	LEVEL_CHANGE(7);
 	
 	private int stateID;
 	
