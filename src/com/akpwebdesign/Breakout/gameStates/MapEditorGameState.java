@@ -259,4 +259,8 @@ public class MapEditorGameState extends BasicGameState implements IGame {
 	@Override
 	public void resetLives() {
 	}
+
+	@Override
+	public void addLife(int lives) {	
+	}
 }

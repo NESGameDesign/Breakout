@@ -259,10 +259,15 @@ public class GameGameState extends BasicGameState implements IGame {
 		entities.clear();
 		this.world = new World(new Vec2(0.0f, 0.0f));
 		this.debug = false;
-		this.score = 0;
 		this.bricksBroken = 0;
 		this.bricks = 0;
 		this.gameLevelList.clear();
+	}
+	
+	public void fullClearState() {
+		clearState();
+		this.score = 0;
+		this.lives = 5;
 	}
 
 	public Map getMap() {
@@ -295,5 +300,10 @@ public class GameGameState extends BasicGameState implements IGame {
 			}
 		}
 		game.enterState(States.WIN_GAME.getStateID());
+	}
+
+	@Override
+	public void addLife(int lives) {
+		this.lives += lives;		
 	}
 }

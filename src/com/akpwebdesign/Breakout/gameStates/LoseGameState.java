@@ -56,12 +56,14 @@ public class LoseGameState extends BasicGameState {
 	    switch(key) {
 	    case Input.KEY_1:
 	    	((GameGameState)game.getState(States.GAME.getStateID())).setLevel(GameLevel.LVL1);
+	    	((GameGameState)game.getState(States.GAME.getStateID())).fullClearState();
 	    	try {game.getState(States.GAME.getStateID()).init(gc, game);}
 	    	catch (SlickException e) {e.printStackTrace();}
 	        game.enterState(States.GAME.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	        break;
 	    case Input.KEY_ESCAPE:
 	    case Input.KEY_2:
+	    	((GameGameState)game.getState(States.GAME.getStateID())).addLife(5);
 	        game.enterState(States.MAIN_MENU.getStateID(), new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
 	        break;
 	    default:
